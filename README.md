@@ -1,2 +1,1 @@
-# cypress-vollmed
 # vollmed-cypress
