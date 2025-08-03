@@ -1,2 +1,1 @@
-# vollmed-cypress
-# vollmed-cypress
+Testes de aprendizagem avançada de Cypress
