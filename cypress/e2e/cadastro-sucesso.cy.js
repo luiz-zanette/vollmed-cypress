@@ -3,23 +3,28 @@ describe('Página de cadastro', () => {
     cy.visit('/');
   })
   
-  it('Clica no link "Cadastra-se" e redireciona para a página de cadastro da clínica', () => {
-    cy.get('[href="/cadastro"]').click();
-    cy.location('pathname').should('eq', '/cadastro'); //asegura que a URL é a correta.
+  context('Verifica redirecionamento da página de cadastro', () => {
+    it('Clica no link "Cadastra-se" e redireciona para a página de cadastro da clínica', () => {
+      cy.get('[href="/cadastro"]').click();
+      cy.location('pathname').should('eq', '/cadastro'); //asegura que a URL é a correta.
+    })
   })
   
-  it('Digita dados da clínica e exibe a área para inserção de dados técnicos', () => {
-    cy.get('[href="/cadastro"]').click();
-    cy.get('[data-test="inputNome"]').type('Catarina P');
-    cy.get('[data-test="inputCNPJ"]').type('12598432');
-    cy.get('[data-test="inputEmail"]').type('catarina@email.com');
-    cy.get('[data-test="inputSenha"]').type('Senha123');
-    cy.get('[data-test="inputSenhaVerificada"]').type('Senha123');
-    cy.get('.sc-bcXHqe').click();
-    cy.contains('h2', 'Agora, os dados técnicos:').should('be.visible'); //verifica se o texto está visível na página
-    cy.get('.sc-laZRCg').should('exist').should('be.visible'); // Verifica a classe.
+  context('Preenche os campos de cadastro', () => {
+    it('Digita dados da clínica e exibe a área para inserção de dados técnicos', () => {
+      cy.get('[href="/cadastro"]').click();
+      cy.get('[data-test="inputNome"]').type('Catarina P');
+      cy.get('[data-test="inputCNPJ"]').type('12598432');
+      cy.get('[data-test="inputEmail"]').type('catarina@email.com');
+      cy.get('[data-test="inputSenha"]').type('Senha123');
+      cy.get('[data-test="inputSenhaVerificada"]').type('Senha123');
+      cy.get('.sc-bcXHqe').click();
+      cy.contains('h2', 'Agora, os dados técnicos:').should('be.visible'); //verifica se o texto está visível na página
+      cy.get('.sc-laZRCg').should('exist').should('be.visible'); // Verifica a classe.
     })
+  })
     
+  context('Cadastra uma clínica, preenche dados de endereço e verifica redirecionamento', () => {
     it('Cadastra uma clínica', () => {
       cy.get('[href="/cadastro"]').click();
       cy.get('[data-test="inputNome"]').type('Catarina P');
@@ -39,5 +44,6 @@ describe('Página de cadastro', () => {
       
       cy.contains('Cadastrar').click();
       cy.location('pathname').should('equal', '/login'); // Verifica se a URL é a correta com /login após o cadastro.
-          });
-      });
+     });
+  });
+});
